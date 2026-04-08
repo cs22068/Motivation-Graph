@@ -1,9 +1,0 @@
-export const DEFAULT_START_AGE = 0;
-export const DEFAULT_END_AGE = 30;
-export const GRAPH_PADDING = { top: 60, right: 40, bottom: 100, left: 70 };
-export const POINT_RADIUS = 7;
-export const HOVER_RADIUS = 10;
-export const MIN_SEGMENT_WIDTH = 32;
-export const EVENT_COLOR = "#27AE60";
-export const DEEP_COLOR = "#F2994A";
-export const SVG_HEIGHT = 540;
