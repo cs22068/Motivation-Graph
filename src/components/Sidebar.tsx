@@ -1,5 +1,4 @@
-import React from "react";
-import { GraphLogic } from "../hooks/useGraphLogic";
+import type { GraphLogic } from "../hooks/useGraphLogic";
 import { EVENT_COLOR, DEEP_COLOR } from "../constants/config";
 
 export default function Sidebar({ logic }: { logic: GraphLogic }) {

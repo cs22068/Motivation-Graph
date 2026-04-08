@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { Point, ViewMode, LineStyle } from "../types";
+import type { Point, ViewMode, LineStyle } from "../types";
 import {
   DEFAULT_START_AGE, DEFAULT_END_AGE, GRAPH_PADDING,
   MIN_SEGMENT_WIDTH, SVG_HEIGHT

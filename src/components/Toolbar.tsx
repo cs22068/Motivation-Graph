@@ -1,6 +1,5 @@
-import React from "react";
-import { GraphLogic } from "../hooks/useGraphLogic";
-import { ViewMode, LineStyle } from "../types";
+import type { GraphLogic } from "../hooks/useGraphLogic";
+import type { ViewMode, LineStyle } from "../types";
 import { DEEP_COLOR } from "../constants/config";
 
 export default function Toolbar({ logic }: { logic: GraphLogic }) {

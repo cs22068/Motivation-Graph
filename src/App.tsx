@@ -1,4 +1,3 @@
-import React from "react";
 import { useGraphLogic } from "./hooks/useGraphLogic";
 import Toolbar from "./components/Toolbar";
 import GraphBoard from "./components/GraphBoard";

@@ -1,5 +1,4 @@
-import React from "react";
-import { GraphLogic } from "../hooks/useGraphLogic";
+import type { GraphLogic } from "../hooks/useGraphLogic";
 import { POINT_RADIUS, HOVER_RADIUS, EVENT_COLOR, DEEP_COLOR, SVG_HEIGHT } from "../constants/config";
 
 const calculateTextWidth = (str: string, fontSize = 10) => {
