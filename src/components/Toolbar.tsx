@@ -55,10 +55,25 @@ export default function Toolbar({ logic }: { logic: GraphLogic }) {
         {logic.showDeepDive ? "深掘り 表示中" : "深掘り 非表示"}
       </button>
 
+      <label style={{
+        padding: "4px 12px", borderRadius: 6, border: "1px solid #cbd5e1",
+        background: "#f8fafc", color: "#475569", fontSize: 11, cursor: "pointer", fontWeight: 600,
+        display: "flex", alignItems: "center"
+      }}>
+        データ読込
+        <input type="file" accept=".json" onChange={logic.importData} style={{ display: "none" }} />
+      </label>
+
+      <button onClick={logic.exportData} style={{
+        padding: "5px 14px", borderRadius: 6, border: "1px solid #3b82f6",
+        background: "#eff6ff", color: "#3b82f6", fontSize: 11, cursor: "pointer", fontWeight: 600,
+      }}>データ保存(JSON)</button>
+      {/* --- ここまで追加 --- */}
+
       <button onClick={logic.exportPNG} style={{
         padding: "5px 14px", borderRadius: 6, border: "none",
         background: "#3b82f6", color: "#fff", fontSize: 12, cursor: "pointer", fontWeight: 600,
-      }}>PNG保存</button>
+      }}>画像保存(PNG)</button>
     </div>
   );
 }

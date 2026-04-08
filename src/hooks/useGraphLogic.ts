@@ -303,6 +303,48 @@ export function useGraphLogic() {
     return ticks;
   }, [xSegments, segX, viewMode]);
 
+  const exportData = useCallback(() => {
+    const dataToSave = {
+      points, startAge, endAge, title, upperLabel, lowerLabel, lineStyle, viewMode,
+      expandedYears: Array.from(expandedYears), showDeepDive
+    };
+    const blob = new Blob([JSON.stringify(dataToSave, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${title || "motivation-graph"}_data.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, [points, startAge, endAge, title, upperLabel, lowerLabel, lineStyle, viewMode, expandedYears, showDeepDive]);
+
+  const importData = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const content = e.target?.result as string;
+        const parsed = JSON.parse(content);
+        if (parsed.points) setPoints(parsed.points);
+        if (parsed.startAge !== undefined) setStartAge(parsed.startAge);
+        if (parsed.endAge !== undefined) setEndAge(parsed.endAge);
+        if (parsed.title !== undefined) setTitle(parsed.title);
+        if (parsed.upperLabel !== undefined) setUpperLabel(parsed.upperLabel);
+        if (parsed.lowerLabel !== undefined) setLowerLabel(parsed.lowerLabel);
+        if (parsed.lineStyle !== undefined) setLineStyle(parsed.lineStyle);
+        if (parsed.viewMode !== undefined) setViewMode(parsed.viewMode);
+        if (parsed.expandedYears) setExpandedYears(new Set(parsed.expandedYears));
+        if (parsed.showDeepDive !== undefined) setShowDeepDive(parsed.showDeepDive);
+      } catch (err) {
+        console.error("ファイルの読み込みに失敗しました", err);
+        alert("無効なデータファイルです．");
+      }
+    };
+    reader.readAsText(file);
+    // 同じファイルを再度選択できるよう，inputの値をリセット
+    event.target.value = '';
+  }, []);
+
   return {
     points, selectedPoint, selectedPointId, hoveredPointId, draggingPointId,
     startAge, endAge, title, upperLabel, lowerLabel, lineStyle, viewMode, expandedYears, showDeepDive,
@@ -310,7 +352,8 @@ export function useGraphLogic() {
     xTicks, pathD, sortedPoints,
     setStartAge, setEndAge, setTitle, setUpperLabel, setLowerLabel, setLineStyle, setViewMode, setExpandedYears, setShowDeepDive,
     setHoveredPointId, setSelectedPointId,
-    handleSvgClick, handlePointMouseDown, toggleYearExpand, updatePoint, deletePoint, exportPNG, displayMonth, ageMonthToX, motivationToY
+    handleSvgClick, handlePointMouseDown, toggleYearExpand, updatePoint, deletePoint, exportPNG, displayMonth, ageMonthToX, motivationToY,
+    exportData, importData
   };
 }
 
